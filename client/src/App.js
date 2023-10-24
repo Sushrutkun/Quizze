@@ -1,13 +1,19 @@
 import './App.css';
+import {BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from "./pages/Home"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 
 function App() {
   return (
-    <div className="App">
-      {/* The objective of this assignment is to create a language learning game that 
-          helps users improve their language proficiency through interactive exercises 
-          and activities. The game should include frontend UI components, backend 
-          logic for scoring, and a database to store user progress and language data */}
-      
+    <div className="App" >
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home/>} />
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
