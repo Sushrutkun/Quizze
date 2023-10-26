@@ -25,7 +25,6 @@ const QuizCard = ({ page, setPage }) => {
     let radio = document.getElementsByName("question");
     console.log(radio);
     for (let i = 0; i < radio.length; i++) {
-      // Do stuff
       console.log(radio[i]);
       radio[i].checked = false;
     }
