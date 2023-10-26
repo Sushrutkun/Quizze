@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import QuizCard from '../components/QuizCard'
 import NavBar from "../components/NavBar"
 
 const Home = () => {
+    const[page,setPage]=useState(1);
     return (
-        <div>
+        <div className='h-screen w-screen'>
             <NavBar />
-            <QuizCard />
+            <QuizCard page={page} setPage={setPage} />
         </div>
     )
 }
