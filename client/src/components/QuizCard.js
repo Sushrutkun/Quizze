@@ -6,9 +6,10 @@ import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr'
 
 const QuizCard = ({ page, setPage }) => {
   const [apiData, setApiData] = useState([]);
-
-  const [vis, setVis] = useState('visible');
   const [ans, setAns] = useState(false);
+
+  
+
   console.log(page);
   useEffect(() => {
     // Fetch data when the component mounts
@@ -40,15 +41,15 @@ const QuizCard = ({ page, setPage }) => {
         apiData.map((data_entry) => (
           <div>
             <h1 className='Quiz Category text-4xl text-center'>This is a {data_entry.category} Quizz</h1>
-            <div className='box ml-40 mt-10 mr-40'>
-              <div className='question border-2 rounded-2xl border-gray-800'>
+            <div className='box ml-40 mt-8 mr-40'>
+              <div className='question border-2 rounded-2xl border-gray-800 pt-1'>
                 <div className='flex justify-between'>
-                  <div className='bg-zinc-200 rounded-lg flex items-center gap-1 justify-start ml-4 mt-2 mb-2 text-2xl border-2 pl-1 pt-1 pb-1 pr-1 border-gray-500'>
+                  <div className='bg-zinc-200 rounded-lg flex items-center gap-1 justify-start ml-4 mt-2 mb-2 text-2xl border-2 pl-2 pt-1 pb-2 pr-2 border-gray-500'>
                     <FaCircleInfo />
                     <h2>Question number {page} of 50</h2>
                   </div>
                   <div className='flex items-center gap-3 justify-start mr-4 mt-2 mb-2 text-md pl-1 pt-1 pb-1 pr-1 border-gray-500'>
-                    <div className={`flex gap-1 items-center cursor-pointer hover:border-2 hover:rounded-lg border-gray-500 pl-1 pr-1 pt-1 pb-1 ${page === 1 ? 'hidden' : 'visible'} `} style={{ visibility: vis }}
+                    <div className={`flex gap-1 items-center cursor-pointer hover:border-2 hover:rounded-lg border-gray-500 pl-1 pr-1 pt-1 pb-1 ${page === 1 ? 'hidden' : 'visible'} `}
                       onClick={() => {
                         page > 1 ? setPage(page - 1) : setPage(page);
                       }
@@ -64,8 +65,12 @@ const QuizCard = ({ page, setPage }) => {
                   </div>
                 </div>
                 <div className='new_div ml-12 mt-2 mb-2 mr-12 flex flex-col flex-wrap '>
-                  <h3 className='Head ml-4 mr-4 text-xl font-semibold'>{data_entry.question}</h3>
-                  <h5 className='Difficulty ml-4 text-base text-orange-600'>{data_entry.difficulty.toUpperCase()}</h5>
+                  <h3 className='Head ml-4 mr-4 text-xl font-semibold'>{(new DOMParser()).parseFromString(data_entry.question, 'text/html').body.textContent}</h3>
+                  <h5 className={`Difficulty ml-4 text-base font-semibold
+                  ${data_entry.difficulty == 'easy' ? 'text-green-500' : null}
+                  ${data_entry.difficulty == 'medium' ? 'text-yellow-500' : null}
+                  ${data_entry.difficulty == 'hard' ? 'text-red-500' : null}
+                  `}>{data_entry.difficulty.toUpperCase()}</h5>
                 </div>
                 <div className='ml-12'>
                   <div className='ml-4 text-gray-600 text-lg'>
@@ -91,7 +96,7 @@ const QuizCard = ({ page, setPage }) => {
                       }
                       <div className=''>
                         <button type='reset' className='text-base text-red-400 mb-2 mt-1'>Clear Selection</button>
-                        <div className='flex justify-end items-center'>
+                        <div className='flex justify-end items-center mt-2 mb-2'>
                           <button type='submit' className=' text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2' onClick={handleSubmit}>Save & Next</button>
                         </div>
                       </div>
