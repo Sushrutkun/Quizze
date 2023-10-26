@@ -81,7 +81,8 @@ const QuizCard = ({ page, setPage }) => {
                       <label onClick={() => { setAns(true); console.log(ans) }} >
                         <div className=' hover:bg-zinc-300 cursor-pointer rounded-lg duration-200'>
                           <input type='radio' id='1' name='question' class="w-3 h-3 mr-4 ml-2" />
-                          {data_entry.correct_answer}
+                          {/* {data_entry.correct_answer} */}
+                          {(new DOMParser()).parseFromString(data_entry.correct_answer, 'text/html').body.textContent}
                         </div>
                       </label>
                       {
@@ -89,7 +90,8 @@ const QuizCard = ({ page, setPage }) => {
                           <label key={index} onClick={() => { setAns(false); console.log(ans) }}>
                             <div className='hover:bg-zinc-300 cursor-pointer rounded-lg duration-200' >
                               <input type='radio' name='question' className="w-3 h-3 mr-4 ml-2" />
-                              {option}
+                              {/* {option} */}
+                              {(new DOMParser()).parseFromString(option, 'text/html').body.textContent}
                             </div>
                           </label>
                         ))
