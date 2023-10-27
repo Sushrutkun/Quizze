@@ -67,9 +67,9 @@ const QuizCard = ({ page, setPage }) => {
                 <div className='new_div ml-12 mt-2 mb-2 mr-12 flex flex-col flex-wrap '>
                   <h3 className='Head ml-4 mr-4 text-xl font-semibold'>{(new DOMParser()).parseFromString(data_entry.question, 'text/html').body.textContent}</h3>
                   <h5 className={`Difficulty ml-4 text-base font-semibold
-                  ${data_entry.difficulty == 'easy' ? 'text-green-500' : null}
-                  ${data_entry.difficulty == 'medium' ? 'text-yellow-500' : null}
-                  ${data_entry.difficulty == 'hard' ? 'text-red-500' : null}
+                  ${data_entry.difficulty === 'easy' ? 'text-green-500' : null}
+                  ${data_entry.difficulty === 'medium' ? 'text-yellow-500' : null}
+                  ${data_entry.difficulty === 'hard' ? 'text-red-500' : null}
                   `}>{data_entry.difficulty.toUpperCase()}</h5>
                 </div>
                 <div className='ml-12'>
