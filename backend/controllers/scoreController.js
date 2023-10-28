@@ -3,8 +3,8 @@ import Scorer from "../models/scoreModel.js"
 import user from '../models/userModel.js'
 
 export const countScore = asyncHandler(async (req, res) => {
-    const { username, score, category_id } = req.body;
-    if (!username || !score) {
+    const { username, ansscore, category_id } = req.body;
+    if (!username || !ansscore) {
         res.status(400);
         throw new Error("User or Score not found");
     }
@@ -14,11 +14,15 @@ export const countScore = asyncHandler(async (req, res) => {
     }
     const userFound = await user.findOne({ "username": username });
     const reattempt = await Scorer.findOne({ "user": userFound._id, "catid": category_id });
+    // const new_score = score;
+    // console.log(new_score);
     if (reattempt) {
+        console.log("Checking"); 
         try {
             const addscore = await Scorer.findByIdAndUpdate(reattempt._id, {
-                score: score,
+                score: ansscore,
             });
+            await reattempt.save();
             res.json(addscore);
             console.log(addscore);
         } catch (error) {
@@ -29,9 +33,10 @@ export const countScore = asyncHandler(async (req, res) => {
         try {
             const addscore = await Scorer.create({
                 user: userFound._id,
-                score,
+                score:ansscore,
                 catid:category_id
             })
+            // Scorer.save();
             res.json(addscore);
             console.log(addscore);
         } catch (error) {

@@ -9,12 +9,15 @@ import {useNavigate} from 'react-router-dom'
 
 const QuizCard = ({ page, setPage, questions, categoryid, setQuestions, setCategoryid }) => {
   const [apiData, setApiData] = useState([]);
+  const [score,setScore]=useState(0);
   const [ans, setAns] = useState(false);
+  const username =localStorage.getItem("username");
   // let apiarr=[];
   // const navigate= navigate()
   const navigate= useNavigate()
+  const BASE_URL=process.env.REACT_APP_BASE_URL;
 
-  console.log(page);
+  // console.log(page);
   useEffect(() => {
     // Fetch data when the component mounts
     const fetchData = async () => {
@@ -28,6 +31,23 @@ const QuizCard = ({ page, setPage, questions, categoryid, setQuestions, setCateg
     // apiarr=[apiData[page-1]];
     // window.location.reload();
   }, []);
+  const scoreFetch = async ()=>{
+    const {data}=await axios.post(`${BASE_URL}score`,{
+      username,
+      ansscore:score,
+      category_id:categoryid
+    })
+    console.log(data);
+  }
+  const endfun = ()=>{
+    // navigate('/dashboard');
+    scoreFetch();
+    // alert(`Your score of test was ${score}`);
+  }
+  const nextfun = () =>{
+    setPage(page + 1);
+    ans === true ? setScore(score+1) : setScore(score);
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     let radio = document.getElementsByName("question");
@@ -37,10 +57,7 @@ const QuizCard = ({ page, setPage, questions, categoryid, setQuestions, setCateg
       radio[i].checked = false;
     }
     // radio.checked = false;
-    page===questions?
-    navigate('/dashboard'):
-    setPage(page + 1);
-    // ans === true ? alert("**correct**") : alert("incorrect")
+    page===questions? endfun():nextfun()    
   }
   const data = apiData[0];
   const apiarr = [apiData[page - 1]];
