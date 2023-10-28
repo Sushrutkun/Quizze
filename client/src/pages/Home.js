@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
-import QuizCard from '../components/QuizCard'
-import NavBar from "../components/NavBar"
+import React from 'react'
+import NavBar from '../components/NavBar'
+import Basic from '../components/Basic'
 
-const Home = () => {
-    const[page,setPage]=useState(1);
+const Home = ({questions,categoryid,setQuestions,setCategoryid}) => {
     return (
         <div className='h-screen w-screen relative'>
             <NavBar />
-            <QuizCard page={page} setPage={setPage} />
+            <Basic questions={questions} categoryid={categoryid} setCategoryid={setCategoryid} setQuestions={setQuestions}/>
         </div>
     )
 }

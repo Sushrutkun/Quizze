@@ -17,7 +17,7 @@ app.use(cors());
 
 // api routes
 app.post('/register', registerUser);
-app.post('/login',loginUser)
+app.post('/login', loginUser)
 
 app.listen(port, () => {
     console.log("http://localhost:5000/");

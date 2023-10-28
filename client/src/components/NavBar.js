@@ -5,9 +5,9 @@ const NavBar = () => {
   return (
     <div className='bg-black text-white text-xl pl-8 pt-1 pb-2 mb-3 relative '>
       <div className='flex justify-evenly '>
-        <a className='group transition duration-300'>Home
+        <Link to='/' className='group transition duration-300'>Home
           <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-sky-600 rounded-xl"></span>
-        </a>
+        </Link>
         <a className='group transition duration-300'>Dashboard
           <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-sky-600 rounded-xl"></span>
         </a>

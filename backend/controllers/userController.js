@@ -1,6 +1,7 @@
 import user from '../models/userModel.js'
+import asyncHandler from "express-async-handler";
 
-export const registerUser = async (req, res) => {
+export const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
         res.status(400);
@@ -25,9 +26,9 @@ export const registerUser = async (req, res) => {
         console.log(data);
         res.status(200).json(data);
     }
-}
+});
 
-export const loginUser = async (req, res) => {
+export const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         res.status(400);
@@ -42,4 +43,4 @@ export const loginUser = async (req, res) => {
         res.status(400);
         throw new Error("Please enter correct Username or Password")
     }
-}
+});
