@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import dbConnection from "./config/dbConnection.js";
 import { loginUser, registerUser } from "./controllers/userController.js";
+import { countScore } from "./controllers/scoreController.js";
 
 dotenv.config();
 
@@ -17,7 +18,8 @@ app.use(cors());
 
 // api routes
 app.post('/register', registerUser);
-app.post('/login', loginUser)
+app.post('/login', loginUser);
+app.post('/score',countScore);
 
 app.listen(port, () => {
     console.log("http://localhost:5000/");

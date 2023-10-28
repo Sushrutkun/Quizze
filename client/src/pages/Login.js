@@ -1,16 +1,29 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import dummy from '../assests/dummy.png'
+import axios from 'axios';
 
 const Login = () => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
-    navigate('/');
+    try {
+      const {data} = await axios.post(`${BASE_URL}login`, {
+        email,
+        password
+      });
+      localStorage.setItem('username', data.username);
+      localStorage.setItem('email', data.email);
+      console.log(data);
+      e.target.reset();
+      alert(`Hello ${data.username}`);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
   }
   const handleemail = (e) => {
     setEmail(e.target.value);

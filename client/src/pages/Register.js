@@ -4,7 +4,8 @@ import dummy from '../assests/dummy.png'
 import axios from 'axios';
 
 const Register = () => {
-  const BASE_URL = "http://localhost:5000/"
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  console.log(BASE_URL);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ const Register = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-      const data = await axios.post(`${BASE_URL}register`, {
+      const {data} = await axios.post(`${BASE_URL}register`, {
         username,
         email,
         password

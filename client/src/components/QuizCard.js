@@ -4,13 +4,15 @@ import axios from 'axios'
 import { FaCircleInfo } from 'react-icons/fa6'
 import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr'
 import {HashLoader} from 'react-spinners'
+import {useNavigate} from 'react-router-dom'
 
 
 const QuizCard = ({ page, setPage, questions, categoryid, setQuestions, setCategoryid }) => {
   const [apiData, setApiData] = useState([]);
   const [ans, setAns] = useState(false);
   // let apiarr=[];
-
+  // const navigate= navigate()
+  const navigate= useNavigate()
 
   console.log(page);
   useEffect(() => {
@@ -35,6 +37,8 @@ const QuizCard = ({ page, setPage, questions, categoryid, setQuestions, setCateg
       radio[i].checked = false;
     }
     // radio.checked = false;
+    page===questions?
+    navigate('/dashboard'):
     setPage(page + 1);
     // ans === true ? alert("**correct**") : alert("incorrect")
   }
@@ -111,7 +115,7 @@ const QuizCard = ({ page, setPage, questions, categoryid, setQuestions, setCateg
                       <div className=''>
                         <button type='reset' className='text-base text-red-400 mb-2 mt-1'>Clear Selection</button>
                         <div className='flex justify-end items-center mt-2 mb-2'>
-                          <button type='submit' className=' text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>Save & Next</button>
+                          <button type='submit' className={`text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 `}>Save & Next</button>
                         </div>
                       </div>
                     </form>
